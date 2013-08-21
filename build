@@ -1,0 +1,12 @@
+$REPO = /Users/tmurphy/common/projects/Orion-TTT/target/appassembler/repo/
+mvn clean install
+mvn appassembler:assemble
+cd $REPO
+if [ ! -d "$REPO/Orion/Orion-TTT" ]; then
+    cd Orion
+    mkdir Orion-TTT
+    cd Orion-TTT
+    mkdir 1.0-SNAPSHOT
+    cd /Users/tmurphy/common/projects/Orion-TTT/target
+    cp Orion-TTT-1.0-SNAPSHOT.jar appassembler/repo/Orion/Orion-TTT/1.0-SNAPSHOT/
+fi

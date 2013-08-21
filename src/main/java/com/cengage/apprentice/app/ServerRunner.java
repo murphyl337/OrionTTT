@@ -10,19 +10,19 @@ import org.apache.log4j.Logger;
 
 import com.cengage.apprentice.app.main.OrionServer;
 import com.cengage.apprentice.app.utils.OrionConfigurator;
-import com.cengage.apprentice.app.utils.Responder;
+import com.cengage.apprentice.app.utils.TicTacToeController;
+import com.cengage.apprentice.app.utils.TicTacToeResponder;
 
-public class ServerRunner 
-{
+public class ServerRunner {
     private static final Logger LOGGER = Logger.getLogger(ServerRunner.class);
-    
-    public static void main( String[] args ) throws IOException
-    {
+
+    public static void main(String[] args) throws IOException {
         OrionConfigurator.parseArgs(args);
         final ServerSocket serverSocket = new ServerSocket(getPort());
         final OrionServer server = new OrionServer(serverSocket,
                 OrionConfigurator.getRootDirectory());
         LOGGER.info("Orion-TTT server listening on port: " + getPort());
-        server.listen(new Responder(getRootDirectory()));
+        TicTacToeController controller = new TicTacToeController();
+        server.listen(new TicTacToeResponder(controller, getRootDirectory()));
     }
 }

@@ -71,7 +71,7 @@ if "%JAVACMD%"=="" set JAVACMD=java
 
 if "%REPO%"=="" set REPO=%BASEDIR%\repo
 
-set CLASSPATH="%BASEDIR%"\etc;"%REPO%"\Orion\Orion-server\1.0\Orion-server-1.0.jar;"%REPO%"\Orion\TicTacToe\1.0\TicTacToe-1.0.jar;"%REPO%"\com\google\guava\guava\r05\guava-r05.jar;"%REPO%"\log4j\log4j\1.2.16\log4j-1.2.16.jar;"%REPO%"\Orion\Orion-TTT\1.0-SNAPSHOT\Orion-TTT-1.0-SNAPSHOT.jar
+set CLASSPATH="%BASEDIR%"\etc;"%REPO%"\Orion\Orion-server\1.0\Orion-server-1.0.jar;"%REPO%"\Orion\TicTacToe\1.0\TicTacToe-1.0.jar;"%REPO%"\com\google\guava\guava\r05\guava-r05.jar;"%REPO%"\log4j\log4j\1.2.16\log4j-1.2.16.jar;"%REPO%"\org\mockito\mockito-all\1.8.4\mockito-all-1.8.4.jar;"%REPO%"\com\cengage\apprentice\app\Orion-TTT\1.0-SNAPSHOT\Orion-TTT-1.0-SNAPSHOT.jar
 goto endInit
 
 @REM Reaching here means variables are defined and arguments have been captured
