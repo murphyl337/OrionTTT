@@ -4,9 +4,10 @@ import java.io.FileNotFoundException;
 
 import com.cengage.apprentice.app.main.OrionRequest;
 import com.cengage.apprentice.app.response.OrionResponse;
+import com.cengage.apprentice.app.response.StatusCodeResponse;
 
 public class TicTacToeResponder implements Respondable {
-    private static final String GAME_NEW = "/game/new/";
+    private static final String GAME_NEW = "/game/new";
     private static final String GAME_UPDATE = "/game/update";
     private TicTacToeController controller;
     private String rootDir;
@@ -18,10 +19,10 @@ public class TicTacToeResponder implements Respondable {
 
     public OrionResponse respond(OrionRequest request)
             throws FileNotFoundException {
-        if(GAME_NEW.equals(request.getRoute())){
+        if(request.getRoute().contains(GAME_NEW)){
             return controller.newGame();
         }
-        return null;
+        return new StatusCodeResponse(500);
     }
 
 }
