@@ -1,7 +1,10 @@
 package com.cengage.apprentice.app.utils;
 
+import static org.junit.Assert.*;
+
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 
 import com.cengage.apprentice.app.TTT.GameRepository;
 import com.cengage.apprentice.app.main.OrionRequest;
@@ -21,6 +24,4 @@ public class TicTacToeControllerTest {
     public void tearDown() {
         GameRepository.clear();
     }
-    
-    
 }

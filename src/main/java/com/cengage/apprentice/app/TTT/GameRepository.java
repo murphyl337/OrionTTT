@@ -16,6 +16,7 @@ public class GameRepository {
     }
     
     public static void put(Game game){
+        game.setId(nextId);
         getGames().put(nextId, game);
         nextId++;
     }
