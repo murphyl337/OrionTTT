@@ -1,1 +1,12 @@
 Orion - TicTacToe Server
+
+To build and run: use ./buildAndRun (make sure you have execution permissions)
+
+You may change the -d (root directory) and -p options in buildAndRun;  BEWARE: changing the root directory will cause this to return 404/500's if the newGame.html file is not present.
+
+This server is meant to be used solely for playing TicTacToe using the Java TicTacToe library here: https://github.com/murphyl337/JavaTicTacToe
+
+Routes...
+To play a new game, start the server using the specified script (with default rootDir) and navigate to localhost:{port}/ 
+
+Clicking on squares will send GET requests to the server in order to play the game. Malformed requests (i.e someone manually typing in the URL params) may cause the server to respond with an internal server error (500).
