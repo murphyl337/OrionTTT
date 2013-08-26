@@ -39,6 +39,21 @@
 			<artifactId>mockito-all</artifactId>
 			<version>1.8.4</version>
 		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>1.7.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.hp.gagawa</groupId>
+			<artifactId>gagawa</artifactId>
+			<version>1.0.1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -55,9 +70,6 @@
 					</programs>
 				</configuration>
 			</plugin>
-			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-jar-plugin</artifactId> 
-				<configuration> <archive> <manifest> <mainClass>com.cengage.apprentice.app.ServerRunner</mainClass> 
-				</manifest> </archive> </configuration> </plugin> -->
 		</plugins>
 	</build>
 </project>

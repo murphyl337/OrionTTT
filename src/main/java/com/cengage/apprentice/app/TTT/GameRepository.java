@@ -6,7 +6,6 @@ import source.TTT.Game;
 
 public class GameRepository {
     private static HashMap<Integer, Game> games;
-    private static int nextId = 1;
 
     private GameRepository() {
     }
@@ -15,10 +14,9 @@ public class GameRepository {
         return getGames().get(id);
     }
     
-    public static void put(Game game){
-        game.setId(nextId);
-        getGames().put(nextId, game);
-        nextId++;
+    public static Game put(int id, Game game){
+        getGames().put(id, game);
+        return game;
     }
     
     public static int size(){
@@ -27,7 +25,6 @@ public class GameRepository {
 
     public static void clear() {
         getGames().clear();
-        nextId = 1;
     }
     
     public static boolean isEmpty(){
