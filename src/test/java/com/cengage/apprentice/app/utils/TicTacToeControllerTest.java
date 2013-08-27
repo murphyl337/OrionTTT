@@ -1,15 +1,16 @@
 package com.cengage.apprentice.app.utils;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import source.TTT.Board;
 import source.TTT.Game;
+import source.TTT.Player;
+import source.handles.MinimaxStrategyHandle;
 
 import com.cengage.apprentice.app.TTT.GameRepository;
 import com.cengage.apprentice.app.main.OrionRequest;
@@ -55,7 +56,9 @@ public class TicTacToeControllerTest {
     @Test
     public void updateGameUpdatesBoardForValidMove() throws Exception {
         Board board = new Board();
-        Game game = new Game(board, null, null);
+        Player player1 = new Player("X", null);
+        Player player2 = new Player("O", new MinimaxStrategyHandle());
+        Game game = new Game(board, player1, player2);
         GameRepository.put(game);
 
         controller.updateGame(updateGameRequest);

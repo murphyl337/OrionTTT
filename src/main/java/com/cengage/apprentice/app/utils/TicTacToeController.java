@@ -5,6 +5,7 @@ import source.TTT.Game;
 import source.TTT.GameRules;
 import source.TTT.Player;
 import source.TTT.Position;
+import source.handles.MinimaxStrategyHandle;
 
 import com.cengage.apprentice.app.TTT.GameRepository;
 import com.cengage.apprentice.app.main.OrionRequest;
@@ -20,7 +21,7 @@ public class TicTacToeController {
 
     public OrionResponse newGame() {
         Player player1 = new Player("X", null);
-        Player player2 = new Player("O", null);
+        Player player2 = new Player("O", new MinimaxStrategyHandle());
         Game game = new Game(new Board(), player1, player2);
         GameRepository.put(game);
         return new NewGameResponse(game.getId());
@@ -35,7 +36,7 @@ public class TicTacToeController {
         }
         if (GameRules.isValidMove(move, game.getBoard())) {
             game.updateBoard(marker, move);
-            game.setCurrentPlayer(game.getOtherPlayer(game.getCurrentPlayer()));
+            game.getPlayer2().makeMove(game);
         }
         return new UpdateGameResponse(game);
     }

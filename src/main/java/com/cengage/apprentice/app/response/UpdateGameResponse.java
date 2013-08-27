@@ -33,8 +33,8 @@ public class UpdateGameResponse implements OrionResponse {
 
     public void setBody(){
         Gson gson = new Gson();
-        String game = gson.toJson(this.game);
-        this.body = game;
+        String board = gson.toJson(game.getBoard());
+        this.body = board;
     }
 
     public void setHeader() {
