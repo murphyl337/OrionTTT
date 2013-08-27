@@ -1,10 +1,10 @@
 package com.cengage.apprentice.app.utils;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import source.TTT.Board;
@@ -38,12 +38,21 @@ public class TicTacToeControllerTest {
     public void tearDown() {
         GameRepository.clear();
     }
+    
+    @Test
+    public void newGameStoresAGameInGameRepository() throws Exception {
+        assertEquals(0, GameRepository.size());
+        
+        controller.newGame();
+        
+        assertEquals(1, GameRepository.size());
+    }
 
     @Test
     public void updateGameUpdatesBoardForValidMove() throws Exception {
         Board board = new Board();
         Game game = new Game(board, null, null);
-        GameRepository.put(1, game);
+        GameRepository.put(game);
 
         controller.updateGame(updateGameRequest);
 
@@ -55,7 +64,7 @@ public class TicTacToeControllerTest {
         Board board = new Board();
         board.setSpace(0, 0, "O");
         Game game = new Game(board, null, null);
-        GameRepository.put(2, game);
+        GameRepository.put(game);
 
         controller.updateGame(updateGameRequest);
 
@@ -68,9 +77,10 @@ public class TicTacToeControllerTest {
         Board board = new Board();
         board.setSpace(0, 0, "O");
         Game game = new Game(board, null, null);
-        GameRepository.put(3, game);
+        GameRepository.put(game);
 
-        OrionResponse response = controller.updateGame(malformedUpdateGameRequest);
+        OrionResponse response = controller
+                .updateGame(malformedUpdateGameRequest);
 
         assertEquals(StatusCodeResponse.class, response.getClass());
     }

@@ -1,7 +1,5 @@
 package com.cengage.apprentice.app.utils;
 
-import org.apache.log4j.Logger;
-
 import source.TTT.Board;
 import source.TTT.Game;
 import source.TTT.GameRules;
@@ -15,21 +13,16 @@ import com.cengage.apprentice.app.response.StatusCodeResponse;
 import com.cengage.apprentice.app.response.UpdateGameResponse;
 
 public class TicTacToeController {
-    private static final Logger LOGGER = Logger.getLogger(TicTacToeController.class);
     private static final String GAME = "game";
     private static final String MOVE = "move";
     private static final String PLAYER = "player";
 
     public OrionResponse newGame() {
         Game game = new Game(new Board(), null, null);
-        int gameId = IdGenerator.randInt(1, 99999);
-        game.setId(gameId);
-        LOGGER.info("Game id: " + game.getId());
-        game = GameRepository.put(gameId, game);
-        LOGGER.info("CALLING NEWGAMERESPONSE WITH ID: " + gameId);
-        return new NewGameResponse(gameId);
+        GameRepository.put(game);
+        return new NewGameResponse(game.getId());
     }
-
+    
     public OrionResponse updateGame(OrionRequest request) {
         Game game = getGame(request);
         Position move = getMove(request);
@@ -67,4 +60,5 @@ public class TicTacToeController {
             return null;
         }
     }
+
 }

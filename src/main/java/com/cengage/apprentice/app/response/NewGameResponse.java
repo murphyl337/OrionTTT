@@ -13,6 +13,8 @@ import com.cengage.apprentice.app.utils.OrionConfigurator;
 
 public class NewGameResponse implements OrionResponse {
 
+    private static final String NEW_GAME_HTML = "/newGame.html";
+    private static final String GAME_ID = "gameId";
     private static final Logger LOGGER = Logger
             .getLogger(NewGameResponse.class);
     private static final long serialVersionUID = 1L;
@@ -41,17 +43,16 @@ public class NewGameResponse implements OrionResponse {
         String newGameString;
         try {
             newGameString = FileUtils.readFileToString(newGameFile);
-            String idAdded = newGameString.replace("gameId", String.valueOf(this.id));
+            String idAdded = newGameString.replace(GAME_ID, String.valueOf(this.id));
             this.body = idAdded;
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     private File getNewGameFile() {
-        File newGameFile = new File(OrionConfigurator.getRootDirectory()
-                + "/newGame.html");
+        File newGameFile = new File(OrionConfigurator.getTttDirectory()
+                + NEW_GAME_HTML);
         return newGameFile;
     }
 
