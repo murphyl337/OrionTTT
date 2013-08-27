@@ -3,6 +3,7 @@ package com.cengage.apprentice.app.utils;
 import source.TTT.Board;
 import source.TTT.Game;
 import source.TTT.GameRules;
+import source.TTT.Player;
 import source.TTT.Position;
 
 import com.cengage.apprentice.app.TTT.GameRepository;
@@ -18,11 +19,13 @@ public class TicTacToeController {
     private static final String PLAYER = "player";
 
     public OrionResponse newGame() {
-        Game game = new Game(new Board(), null, null);
+        Player player1 = new Player("X", null);
+        Player player2 = new Player("O", null);
+        Game game = new Game(new Board(), player1, player2);
         GameRepository.put(game);
         return new NewGameResponse(game.getId());
     }
-    
+
     public OrionResponse updateGame(OrionRequest request) {
         Game game = getGame(request);
         Position move = getMove(request);
@@ -32,6 +35,7 @@ public class TicTacToeController {
         }
         if (GameRules.isValidMove(move, game.getBoard())) {
             game.updateBoard(marker, move);
+            game.setCurrentPlayer(game.getOtherPlayer(game.getCurrentPlayer()));
         }
         return new UpdateGameResponse(game);
     }
