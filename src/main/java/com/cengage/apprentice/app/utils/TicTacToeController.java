@@ -29,13 +29,16 @@ public class TicTacToeController {
 
     public OrionResponse updateGame(OrionRequest request) {
         Game game = getGame(request);
+        if(GameRules.isGameOver(game.getBoard())){
+            return new UpdateGameResponse(game);
+        }
         Position move = getMove(request);
         String marker = request.getQueries().get(PLAYER);
-        if (game == null || move == null || marker == null) {
-            return new StatusCodeResponse(500);
-        }
         if (GameRules.isValidMove(move, game.getBoard())) {
             game.updateBoard(marker, move);
+            if(GameRules.isGameOver(game.getBoard())){
+                return new UpdateGameResponse(game);
+            }
             game.getPlayer2().makeMove(game);
         }
         return new UpdateGameResponse(game);
@@ -43,27 +46,16 @@ public class TicTacToeController {
 
     private Position getMove(OrionRequest request) {
         String moveString = request.getQueries().get(MOVE);
-        if (moveString == null) {
-            return null;
-        }
-        try {
-            int row = Integer.parseInt(moveString.split(",")[0]);
-            int col = Integer.parseInt(moveString.split(",")[1]);
-            Position move = new Position(row, col);
-            return move;
-        } catch (NumberFormatException e) {
-            return null;
-        }
+        int row = Integer.parseInt(moveString.substring(0, 1));
+        int col = Integer.parseInt(moveString.substring(1));
+        Position move = new Position(row, col);
+        return move;
     }
 
     private Game getGame(OrionRequest request) {
-        try {
-            Game game = GameRepository.get(Integer.parseInt(request
-                    .getQueries().get(GAME)));
-            return game;
-        } catch (NumberFormatException e) {
-            return null;
-        }
+        Game game = GameRepository.get(Integer.parseInt(request.getQueries()
+                .get(GAME)));
+        return game;
     }
 
 }

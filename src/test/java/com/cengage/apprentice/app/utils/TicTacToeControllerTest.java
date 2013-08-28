@@ -27,7 +27,7 @@ public class TicTacToeControllerTest {
     @Before
     public void setup() {
         String newGameRequestString = "GET /game/new HTTP/1.1\n localhost:5000";
-        String updateGameRequestString = "GET /game/update?game=1&move=0,0&player=X HTTP/1.1\n localhost:5000";
+        String updateGameRequestString = "GET /game/update?game=1&move=00&player=X HTTP/1.1\n localhost:5000";
         String malformedUpdateGameRequestString = "GET /game/update&player=X HTTP/1.1\n localhost:5000";
         String badMoveRequestString = "GET /game/update?game=1&move=ASKLDJ&player=X HTTP/1.1\n localhost:5000";
         newGameRequest = RequestParser.parse(newGameRequestString);
@@ -77,30 +77,4 @@ public class TicTacToeControllerTest {
 
         assertEquals("O", board.getSpace(0, 0));
     }
-
-    @Test
-    public void updateGameReturns500StatusCodeResponseForMalformedRequest()
-            throws Exception {
-        Board board = new Board();
-        board.setSpace(0, 0, "O");
-        Game game = new Game(board, null, null);
-        GameRepository.put(game);
-
-        OrionResponse response = controller
-                .updateGame(malformedUpdateGameRequest);
-
-        assertEquals(StatusCodeResponse.class, response.getClass());
-    }
-    
-    @Test
-    public void updateGameReturns500StatusCodeResponseForInvalidMove() throws Exception {
-        Board board = new Board();
-        board.setSpace(0, 0, "O");
-        Game game = new Game(board, null, null);
-        GameRepository.put(game);
-        
-        OrionResponse response = controller.updateGame(badMoveRequest);
-        assertTrue(response.getHeader().contains("500"));
-    }
-
 }

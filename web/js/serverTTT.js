@@ -1,23 +1,44 @@
 $(document).ready(function(){
 	var view = new View();
-	view.listen();
+	var gui = new TicTacToeGUI(view);
+	gui.listen();
 });
 
-function View(){
-	var view = this;
+function TicTacToeGUI(view){
+	this.view = view;
+	var gui = this;
 
 	this.listen = function(){
 		var $box = $(".box");
-		$box.on('click', view.sendMove);
+		$box.on('click', gui.sendMove);
 	};
 
 	this.sendMove = function(event){
-		var gameId = document.getElementById("game_id").innerHTML;
+		var gameId = $("#game_id").html();
 		var position = event.target.id;
 
 		$.get("/game/update", { game: gameId, move: position, player: "X" })
 		.done(function(data) {
- 			alert("Data Loaded: " + data);
+ 			gui.view.update(data);
 		});
+	};
+}
+
+function View(){
+	var self = this;
+
+	this.update = function(json){
+		var jsonObj = JSON.parse(json);
+		var state = jsonObj['state'];
+		var boxDiv;
+
+		for(var row=0; row<3; row++){
+			for(var col=0; col<3; col++){
+				var rowString = row.toString();
+				var colString = col.toString();
+				boxDiv = document.getElementById(rowString.concat(colString));
+				boxDiv.innerHTML = state[row][col];
+			}
+		}
 	};
 }
