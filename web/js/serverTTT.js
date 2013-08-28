@@ -17,7 +17,7 @@ function TicTacToeGUI(view){
 		var gameId = $("#game_id").html();
 		var position = event.target.id;
 
-		$.get("/game/update", { game: gameId, move: position, player: "X" })
+		$.get("/game/update", {game: gameId, move: position, player: "X"})
 		.done(function(data) {
  			gui.view.update(data);
 		});
@@ -25,7 +25,7 @@ function TicTacToeGUI(view){
 }
 
 function View(){
-	var self = this;
+    var self = this;
 
 	this.update = function(json){
 		var jsonObj = JSON.parse(json);
@@ -40,5 +40,18 @@ function View(){
 				boxDiv.innerHTML = state[row][col];
 			}
 		}
+
+        self.applyStyles();
 	};
+
+    this.applyStyles = function(){
+        $(".box").each(function(){
+            if($(this).text() === "X"){
+                $(this).addClass("green");
+            }
+            else if($(this).text() === "O"){
+                $(this).addClass("pink");
+            }
+        });
+    };
 }

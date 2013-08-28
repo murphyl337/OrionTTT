@@ -31,7 +31,7 @@ describe("TicTacToe GUI", function(){
 
 			view = new View();
 
-			jsonResponse = {"state":[["X","",""],["","",""],["","",""]]};
+			jsonResponse = '{"state":[["X","",""],["O","",""],["","",""]]}';
 		});
 
 		describe("update", function(){
@@ -42,6 +42,13 @@ describe("TicTacToe GUI", function(){
 
 				expect($("#00")).toContainText("X");
 			});
+
+            it("applies css styles", function(){
+                view.update(jsonResponse);
+
+                expect($("#00")).toHaveClass("box green");
+                expect($("#10")).toHaveClass("box pink");
+            });
 		});
 	});
 });
