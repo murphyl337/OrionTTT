@@ -1,5 +1,6 @@
 package com.cengage.apprentice.app.utils;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -76,5 +77,26 @@ public class TicTacToeControllerTest {
         controller.updateGame(updateGameRequest);
 
         assertEquals("O", board.getSpace(0, 0));
+    }
+    
+    @Test
+    public void updateGameDoesNotUpdateBoardForCompletedGame() throws Exception {
+        Game game = createDrawGame();
+        GameRepository.put(game);
+        
+        controller.updateGame(updateGameRequest);
+        
+        Game updatedGame = GameRepository.get(1);
+        assertEquals("", updatedGame.getBoard().getSpace(0, 0));
+    }
+
+    private Game createDrawGame() {
+        Board board = new Board();
+        board.setSpace(1, 0, "O");
+        board.setSpace(1, 1, "O");
+        board.setSpace(1, 2, "O");
+        Game game = new Game(board, null, null);
+        game.setId(1);
+        return game;
     }
 }

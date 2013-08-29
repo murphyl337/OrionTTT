@@ -11,7 +11,6 @@ import com.cengage.apprentice.app.TTT.GameRepository;
 import com.cengage.apprentice.app.main.OrionRequest;
 import com.cengage.apprentice.app.response.NewGameResponse;
 import com.cengage.apprentice.app.response.OrionResponse;
-import com.cengage.apprentice.app.response.StatusCodeResponse;
 import com.cengage.apprentice.app.response.UpdateGameResponse;
 
 public class TicTacToeController {
@@ -29,19 +28,22 @@ public class TicTacToeController {
 
     public OrionResponse updateGame(OrionRequest request) {
         Game game = getGame(request);
-        if(GameRules.isGameOver(game.getBoard())){
+        if(gameIsOver(game)){
             return new UpdateGameResponse(game);
         }
         Position move = getMove(request);
         String marker = request.getQueries().get(PLAYER);
         if (GameRules.isValidMove(move, game.getBoard())) {
             game.updateBoard(marker, move);
-            if(GameRules.isGameOver(game.getBoard())){
+            if(gameIsOver(game))
                 return new UpdateGameResponse(game);
-            }
             game.getPlayer2().makeMove(game);
         }
         return new UpdateGameResponse(game);
+    }
+
+    private boolean gameIsOver(Game game) {
+        return GameRules.isGameOver(game.getBoard());
     }
 
     private Position getMove(OrionRequest request) {
