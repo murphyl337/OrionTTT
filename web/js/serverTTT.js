@@ -13,14 +13,18 @@ function TicTacToeGUI(view){
 		$box.on('click', gui.sendMove);
 	};
 
-	this.sendMove = function(event){
+    function tictactoeAjax(gameId, position) {
+        $.get("/game/update", {game: gameId, move: position, player: "X"})
+            .done(function (data) {
+                gui.view.update(data);
+            });
+    }
+
+    this.sendMove = function(event){
 		var gameId = $("#game_id").html();
 		var position = event.target.id;
 
-		$.get("/game/update", {game: gameId, move: position, player: "X"})
-		.done(function(data) {
- 			gui.view.update(data);
-		});
+		tictactoeAjax(gameId, position);
 	};
 }
 
