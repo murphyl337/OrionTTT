@@ -28,18 +28,20 @@ public class TicTacToeController {
 
     public OrionResponse updateGame(OrionRequest request) {
         Game game = getGame(request);
+        Position move = getMove(request);
+        String marker = request.getQueries().get(PLAYER);
         if(gameIsOver(game)){
             return new UpdateGameResponse(game);
         }
-        Position move = getMove(request);
-        String marker = request.getQueries().get(PLAYER);
+        makeMove(game, move, marker);
+        return new UpdateGameResponse(game);
+    }
+
+    private void makeMove(Game game, Position move, String marker) {
         if (GameRules.isValidMove(move, game.getBoard())) {
             game.updateBoard(marker, move);
-            if(gameIsOver(game))
-                return new UpdateGameResponse(game);
             game.getPlayer2().makeMove(game);
         }
-        return new UpdateGameResponse(game);
     }
 
     private boolean gameIsOver(Game game) {

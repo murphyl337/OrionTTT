@@ -71,7 +71,7 @@ if "%JAVACMD%"=="" set JAVACMD=java
 
 if "%REPO%"=="" set REPO=%BASEDIR%\repo
 
-set CLASSPATH="%BASEDIR%"\etc;"%REPO%"\Orion\Orion-server\1.2-SNAPSHOT\Orion-server-1.2-SNAPSHOT.jar;"%REPO%"\Orion\TicTacToe\1.0\TicTacToe-1.0.jar;"%REPO%"\com\google\guava\guava\r05\guava-r05.jar;"%REPO%"\log4j\log4j\1.2.16\log4j-1.2.16.jar;"%REPO%"\org\mockito\mockito-all\1.8.4\mockito-all-1.8.4.jar;"%REPO%"\com\google\code\gson\gson\1.7.1\gson-1.7.1.jar;"%REPO%"\commons-io\commons-io\2.4\commons-io-2.4.jar;"%REPO%"\com\hp\gagawa\gagawa\1.0.1\gagawa-1.0.1.jar;"%REPO%"\com\cengage\apprentice\app\Orion-TTT\1.0-SNAPSHOT\Orion-TTT-1.0-SNAPSHOT.jar
+set CLASSPATH="%BASEDIR%"\etc;"%REPO%"\Orion\Orion-server\1.2-SNAPSHOT\Orion-server-1.2-SNAPSHOT.jar;"%REPO%"\Orion\TicTacToe\1.1\TicTacToe-1.1.jar;"%REPO%"\com\google\guava\guava\r05\guava-r05.jar;"%REPO%"\log4j\log4j\1.2.16\log4j-1.2.16.jar;"%REPO%"\org\mockito\mockito-all\1.8.4\mockito-all-1.8.4.jar;"%REPO%"\com\google\code\gson\gson\1.7.1\gson-1.7.1.jar;"%REPO%"\commons-io\commons-io\2.4\commons-io-2.4.jar;"%REPO%"\com\hp\gagawa\gagawa\1.0.1\gagawa-1.0.1.jar;"%REPO%"\com\cengage\apprentice\app\Orion-TTT\1.0-SNAPSHOT\Orion-TTT-1.0-SNAPSHOT.jar
 goto endInit
 
 @REM Reaching here means variables are defined and arguments have been captured
