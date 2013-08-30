@@ -1,8 +1,4 @@
 #!/bin/bash
-reldir='dirname $0'
-cd $reldir
-directory=`pwd`
-cd directory
 mvn package appassembler:assemble
 cd target/appassembler/bin
 chmod +x orion-ttt
