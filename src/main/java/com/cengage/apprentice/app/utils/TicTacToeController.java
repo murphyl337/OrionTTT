@@ -57,9 +57,8 @@ public class TicTacToeController {
     }
 
     private Game getGame(OrionRequest request) {
-        Game game = GameRepository.get(Integer.parseInt(request.getQueries()
+        return GameRepository.get(Integer.parseInt(request.getQueries()
                 .get(GAME)));
-        return game;
     }
 
 }
