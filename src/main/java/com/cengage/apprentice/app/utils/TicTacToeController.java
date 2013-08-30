@@ -30,11 +30,10 @@ public class TicTacToeController {
         Game game = getGame(request);
         Position move = getMove(request);
         String marker = request.getQueries().get(PLAYER);
-        if(gameIsOver(game)){
-            return new UpdateGameResponse(game);
+        if(!gameIsOver(game)){
+            makeMove(game, move, marker);
         }
-        makeMove(game, move, marker);
-        return new UpdateGameResponse(game);
+        return new UpdateGameResponse(game);            
     }
 
     private void makeMove(Game game, Position move, String marker) {
