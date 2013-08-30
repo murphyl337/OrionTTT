@@ -30,7 +30,7 @@ public class TicTacToeController {
         Game game = getGame(request);
         Position move = getMove(request);
         String marker = request.getQueries().get(PLAYER);
-        if(!gameIsOver(game)){
+        if(continueGame(game)){
             makeMove(game, move, marker);
         }
         return new UpdateGameResponse(game);            
@@ -43,8 +43,8 @@ public class TicTacToeController {
         }
     }
 
-    private boolean gameIsOver(Game game) {
-        return GameRules.isGameOver(game.getBoard());
+    private boolean continueGame(Game game) {
+        return !(GameRules.isGameOver(game.getBoard()));
     }
 
     private Position getMove(OrionRequest request) {
